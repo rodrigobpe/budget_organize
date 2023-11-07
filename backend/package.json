@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rodrigobpe/tcc_agenda_upa.git"
+    "url": "git+https://github.com/rodrigobpe/budget_organize.git"
   },
   "keywords": [
     "api",
@@ -18,7 +18,7 @@
   ],
   "author": "Rodrigo Batista Pereira",
   "license": "ISC",
-  "homepage": "https://github.com/rodrigobpe/tcc_agenda_upa#readme",
+  "homepage": "https://github.com/rodrigobpe/budget_organize#readme",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.14",
