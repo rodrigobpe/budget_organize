@@ -10,13 +10,21 @@ export default class UserController {
     async createUser({ req, res }: HandleRequest) {
         const { email, name, password }: CreateUserDto = req.body
         if (!email || !name || !password) throw new InvalidBodyError();
-
         const userRes = await this.userService.createUser({ email, name, password })
         const { password: _, ...user } = userRes
-
         return res.status(HttpStatus.CREATED).json({
             statusCode: HttpStatus.CREATED,
             message: 'Usuário criado',
+            user
+        })
+    }
+
+    async getUserById({ req, res }: HandleRequest) {
+        const { id } = req.params
+        const userRes = await this.userService.getUserById({ user_id: id })
+        const { password: _, ...user } = userRes
+        return res.status(HttpStatus.OK).json({
+            statusCode: HttpStatus.OK,
             user
         })
     }
