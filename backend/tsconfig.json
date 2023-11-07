@@ -1,0 +1,43 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "declaration": true,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "es2020",
+        "sourceMap": true,
+        "outDir": "./dist",
+        "strict": true,
+        "baseUrl": ".",
+        "incremental": true,
+        "skipLibCheck": true,
+        "strictNullChecks": false,
+        "noImplicitAny": false,
+        "strictBindCallApply": false,
+        "forceConsistentCasingInFileNames": false,
+        "noFallthroughCasesInSwitch": false,
+        "esModuleInterop": true,
+        "paths": {
+            "@controllers/*":["./src/controllers/*"],
+            "@database/*":["./src/database/*"],
+            "@entities/*":["./src/entities/*"],
+            "@errors/*":["./src/errors/*"],
+            "@middlewares/*":["./src/middlewares/*"],
+            "@repositories/*":["./src/repositories/*"],
+            "@router/*":["./src/router/*"],
+            "@services/*":["./src/services/*"],
+            "@utils/*":["./src/utils/*"],
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "test",
+        "dist",
+        "**/*spec.ts"
+    ],
+    "include": [
+        "src/**/*"
+    ]
+}

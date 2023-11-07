@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id              String   @id @default(uuid())
+  name                 String
+  email                String   @unique
+  password             String
+  is_balance_recurrent Boolean?
+
+  balance Balance[]
+  bill    Bill[]
+
+  @@map("user")
+}
+
+model Balance {
+  balance_id BigInt   @id @default(autoincrement())
+  amount     Decimal
+  strategy   Strategy
+  created_at DateTime @default(now())
+  user_id    String
+
+  user User @relation(fields: [user_id], references: [user_id])
+
+  @@map("balance")
+}
+
+model Bill {
+  bill_id        BigInt   @id @default(autoincrement())
+  price          Decimal
+  title          String
+  date           DateTime @default(now())
+  user_id        String
+  category_id    Int      @unique
+  tag_id         Int
+  credit_card_id Int
+
+  user        User       @relation(fields: [user_id], references: [user_id])
+  category    Category   @relation(fields: [category_id], references: [category_id])
+  tag         Tag        @relation(fields: [tag_id], references: [tag_id])
+  credit_card CreditCard @relation(fields: [credit_card_id], references: [credit_card_id])
+
+  @@map("bill")
+}
+
+model Category {
+  category_id Int    @id @default(autoincrement())
+  name        String
+  Bill        Bill?
+
+  @@map("category")
+}
+
+model Tag {
+  tag_id Int    @id @default(autoincrement())
+  name   String
+  Bill   Bill[]
+
+  @@map("tag")
+}
+
+model CreditCard {
+  credit_card_id   Int      @id @default(autoincrement())
+  name             String
+  icon             String   @db.VarChar(60)
+  invoice_due_date DateTime @db.Timestamp()
+  Bill             Bill[]
+
+  @@map("credit_card")
+}
+
+enum Strategy {
+  Daily
+  Weekly
+  Biweekly
+  Annual
+}
