@@ -4,6 +4,18 @@ import UserRepo from "./user.repo";
 import prisma from "@database/index";
 
 export default class PrismaUserRepo implements UserRepo {
+    async getAll(): Promise<Partial<User>[]> {
+        return await prisma.user.findMany({
+            select:{
+                email:true,
+                is_balance_recurrent:true,
+                name:true,
+                user_id:true,
+                balance:true,
+                bill:true
+            }
+        })
+    }
     async create({ email, name, password }: CreateUserDto): Promise<User> {
         return await prisma.user.create({
             data: {

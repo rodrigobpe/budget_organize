@@ -28,4 +28,12 @@ export default class UserController {
             user
         })
     }
+
+    async getAllUsers({ req, res }: HandleRequest) {
+        const users = await this.userService.getAllUsers()
+        return res.status(HttpStatus.OK).json({
+            statusCode: HttpStatus.OK,
+            users
+        })
+    }
 }

@@ -18,4 +18,10 @@ export default class UserService{
         if(!user) throw new NotFoundError('Usuário não encontrado')
         return user
     }
+
+    async getAllUsers(){
+        const users = await this.prismaUserRepo.getAll()
+        if(users.length === 0) throw new NotFoundError('Nenhum usuário encontrado')
+        return users
+    }
 }
