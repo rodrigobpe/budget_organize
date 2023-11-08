@@ -6,13 +6,13 @@ import prisma from "@database/index";
 export default class PrismaUserRepo implements UserRepo {
     async getAll(): Promise<Partial<User>[]> {
         return await prisma.user.findMany({
-            select:{
-                email:true,
-                is_balance_recurrent:true,
-                name:true,
-                user_id:true,
-                balance:true,
-                bill:true
+            select: {
+                email: true,
+                is_balance_recurrent: true,
+                name: true,
+                user_id: true,
+                balance: true,
+                bill: true
             }
         })
     }
@@ -32,6 +32,12 @@ export default class PrismaUserRepo implements UserRepo {
 
     async getById({ user_id }: { user_id: string; }): Promise<User> {
         return await prisma.user.findFirst({
+            where: { user_id }
+        })
+    }
+
+    async delete({ user_id }: { user_id: string; }): Promise<void> {
+        await prisma.user.delete({
             where: { user_id }
         })
     }

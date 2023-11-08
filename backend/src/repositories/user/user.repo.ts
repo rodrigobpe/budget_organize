@@ -6,4 +6,5 @@ export default abstract class UserRepo{
     abstract getAll():Promise<Partial<User>[] | null>
     abstract getById({user_id}:{user_id:string}):Promise<User | null>
     abstract getByEmail({email}:{email:string}):Promise<User | null>
+    abstract delete({user_id}:{user_id:string}):Promise<void>
 }

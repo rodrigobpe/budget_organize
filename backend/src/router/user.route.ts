@@ -9,8 +9,9 @@ const repo = new PrismaUserRepo()
 const service = new UserService(repo)
 const controller = new UserController(service)
 
-userRoute.post('/', (req:Request,res:Response) => (controller.createUser({req,res})))
-userRoute.get('/:id', (req:Request,res:Response) => (controller.getUserById({req,res})))
-userRoute.get('/', (req:Request,res:Response) => (controller.getAllUsers({req,res})))
+userRoute.post('/', (req:Request,res:Response) => (controller.handleCreateUser({req,res})))
+userRoute.get('/', (req:Request,res:Response) => (controller.handleGetAllUsers({req,res})))
+userRoute.get('/:id', (req:Request,res:Response) => (controller.handleGetUserById({req,res})))
+userRoute.delete('/:id', (req:Request,res:Response) => (controller.handleDeleteUser({req,res})))
 
 export default userRoute

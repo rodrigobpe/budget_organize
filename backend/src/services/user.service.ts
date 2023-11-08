@@ -24,4 +24,10 @@ export default class UserService{
         if(users.length === 0) throw new NotFoundError('Nenhum usuário encontrado')
         return users
     }
+
+    async deleteUser({user_id}:{user_id:string}){
+        const user = await this.prismaUserRepo.getById({user_id})
+        if(!user) throw new NotFoundError('Usuário não encontrado')
+        return await this.prismaUserRepo.delete({user_id})
+    }
 }

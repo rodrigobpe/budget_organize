@@ -9,7 +9,7 @@ export const handleErrorMiddleware = (error:BaseError,req:Request,res:Response,n
     return res.status(error.statusCode).json({
         statusCode,
         message,
-        timeStanp: new Date()
+        timestamp: new Date()
     })
 }
 

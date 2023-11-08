@@ -7,7 +7,7 @@ import HttpStatus from "@utils/http-status";
 export default class UserController {
     constructor(private readonly userService: UserService) { }
 
-    async createUser({ req, res }: HandleRequest) {
+    async handleCreateUser({ req, res }: HandleRequest) {
         const { email, name, password }: CreateUserDto = req.body
         if (!email || !name || !password) throw new InvalidBodyError();
         const userRes = await this.userService.createUser({ email, name, password })
@@ -19,7 +19,7 @@ export default class UserController {
         })
     }
 
-    async getUserById({ req, res }: HandleRequest) {
+    async handleGetUserById({ req, res }: HandleRequest) {
         const { id } = req.params
         const userRes = await this.userService.getUserById({ user_id: id })
         const { password: _, ...user } = userRes
@@ -29,11 +29,20 @@ export default class UserController {
         })
     }
 
-    async getAllUsers({ req, res }: HandleRequest) {
+    async handleGetAllUsers({ req, res }: HandleRequest) {
         const users = await this.userService.getAllUsers()
         return res.status(HttpStatus.OK).json({
             statusCode: HttpStatus.OK,
             users
+        })
+    }
+
+    async handleDeleteUser({ req, res }: HandleRequest) {
+        const { id } = req.params
+        await this.userService.deleteUser({ user_id: id })
+        return res.status(HttpStatus.OK).json({
+            statusCode: HttpStatus.OK,
+            message:'Usuário deletado'
         })
     }
 }
