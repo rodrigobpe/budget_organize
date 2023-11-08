@@ -1,8 +1,13 @@
 import { Router } from "express";
-import userRoute from "./user.route";
+import userRouter from "./user.router";
+import authRouter from "./auth.router";
+import authMiddleware from "@middlewares/auth.midd";
 
 const router = Router()
 
-router.use('/users',userRoute)
+router.use('/auth',authRouter)
+
+
+router.use('/users',userRouter)
 
 export default router
