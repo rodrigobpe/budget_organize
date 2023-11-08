@@ -13,5 +13,6 @@ userRoute.post('/', (req:Request,res:Response) => (controller.handleCreateUser({
 userRoute.get('/', (req:Request,res:Response) => (controller.handleGetAllUsers({req,res})))
 userRoute.get('/:id', (req:Request,res:Response) => (controller.handleGetUserById({req,res})))
 userRoute.delete('/:id', (req:Request,res:Response) => (controller.handleDeleteUser({req,res})))
+userRoute.patch('/:id', (req:Request,res:Response) => (controller.handleUpdateUser({req,res})))
 
 export default userRoute

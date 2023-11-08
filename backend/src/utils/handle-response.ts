@@ -12,7 +12,7 @@ export default class HandleResponse {
         return res.status(this.statusCode).json({
             statusCode: this.statusCode,
             message: this.message,
-            user: this?.data
+            data: this?.data
         })
     }
 }
