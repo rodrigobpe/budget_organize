@@ -17,17 +17,19 @@ model User {
   password             String
   is_balance_recurrent Boolean?
 
-  balance Balance[]
-  bill    Bill[]
+  balance     Balance[]
+  bill        Bill[]
+  tag         Tag[]
+  credit_card CreditCard[]
 
   @@map("user")
 }
 
 model Balance {
-  balance_id BigInt   @id @default(autoincrement())
+  balance_id BigInt    @id @default(autoincrement())
   amount     Decimal
   strategy   Strategy?
-  created_at DateTime @default(now())
+  created_at DateTime  @default(now())
   user_id    String
 
   user User @relation(fields: [user_id], references: [user_id])
@@ -42,13 +44,12 @@ model Bill {
   date           DateTime @default(now())
   user_id        String
   category_id    Int      @unique
-  tag_id         Int
   credit_card_id Int
 
   user        User       @relation(fields: [user_id], references: [user_id])
   category    Category   @relation(fields: [category_id], references: [category_id])
-  tag         Tag        @relation(fields: [tag_id], references: [tag_id])
   credit_card CreditCard @relation(fields: [credit_card_id], references: [credit_card_id])
+  Tag         Tag[]
 
   @@map("bill")
 }
@@ -62,9 +63,13 @@ model Category {
 }
 
 model Tag {
-  tag_id Int    @id @default(autoincrement())
-  name   String
-  Bill   Bill[]
+  tag_id  Int    @id @default(autoincrement())
+  name    String
+  user_id String
+  bill_id BigInt
+
+  Bill Bill @relation(fields: [bill_id], references: [bill_id])
+  User User @relation(fields: [user_id], references: [user_id])
 
   @@map("tag")
 }
@@ -74,7 +79,10 @@ model CreditCard {
   name             String
   icon             String   @db.VarChar(60)
   invoice_due_date DateTime @db.Timestamp()
-  Bill             Bill[]
+  user_id          String
+
+  Bill Bill[]
+  User User   @relation(fields: [user_id], references: [user_id])
 
   @@map("credit_card")
 }

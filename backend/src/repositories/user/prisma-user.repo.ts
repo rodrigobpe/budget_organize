@@ -13,7 +13,8 @@ export default class PrismaUserRepo implements UserRepo {
                 name: true,
                 user_id: true,
                 balance: true,
-                bill: true
+                bill:true,
+                credit_card:true,
             }
         })
     }
@@ -36,7 +37,8 @@ export default class PrismaUserRepo implements UserRepo {
             where: { user_id },
             include:{
                 balance:true,
-                bill:true
+                bill:true,
+                credit_card:true,
             }
         })
     }
