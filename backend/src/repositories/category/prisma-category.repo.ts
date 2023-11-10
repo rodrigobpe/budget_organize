@@ -12,6 +12,13 @@ export default class PrismaCategoryRepo implements CategoryRepo {
         })
     }
     async getAll(): Promise<Partial<Category>[]> {
-        return await prisma.category.findMany({ orderBy: { name: "asc" }})
+        return await prisma.category.findMany({ orderBy: { name: "asc" } })
+    }
+
+    async update({ category_id, name }: Category): Promise<Category> {
+        return await prisma.category.update({
+            data: { name },
+            where: { category_id }
+        })
     }
 }
