@@ -21,4 +21,8 @@ export default class PrismaCategoryRepo implements CategoryRepo {
             where: { category_id }
         })
     }
+
+    async getById({ category_id }: { category_id: number; }): Promise<Category> {
+        return await prisma.category.findFirst({ where: { category_id } })
+    }
 }
