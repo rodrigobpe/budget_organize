@@ -1,0 +1,2 @@
+const utcBrazilMilliseconds = 10800000
+export default utcBrazilMilliseconds
