@@ -13,7 +13,7 @@ const controller = new UserController(service)
 userRouter.post('/', (req:Request,res:Response) => (controller.handleCreateUser({req,res})))
 userRouter.use(authMiddleware)
 userRouter.get('/', (req:Request,res:Response) => (controller.handleGetAllUsers({req,res})))
-userRouter.get('/:id', (req:Request,res:Response) => (controller.handleGetUserById({req,res})))
+userRouter.get('/profile', (req:Request,res:Response) => (controller.handleGetUserById({req,res})))
 userRouter.delete('/:id', (req:Request,res:Response) => (controller.handleDeleteUser({req,res})))
 userRouter.patch('/:id', (req:Request,res:Response) => (controller.handleUpdateUser({req,res})))
 

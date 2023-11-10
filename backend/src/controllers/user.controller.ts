@@ -18,8 +18,8 @@ export default class UserController {
     }
 
     async handleGetUserById({ req, res }: HandleRequest) {
-        const { id } = req.params
-        const userRes = await this.userService.getUserById({ user_id: id })
+        const { user_id } = req
+        const userRes = await this.userService.getUserById({ user_id })
         const { password: _, ...user } = userRes
         return new HandleResponse(HttpStatus.OK, undefined, user).execute(res)
     }

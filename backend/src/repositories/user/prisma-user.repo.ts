@@ -33,7 +33,11 @@ export default class PrismaUserRepo implements UserRepo {
 
     async getById({ user_id }: { user_id: string; }): Promise<User> {
         return await prisma.user.findFirst({
-            where: { user_id }
+            where: { user_id },
+            include:{
+                balance:true,
+                bill:true
+            }
         })
     }
 
