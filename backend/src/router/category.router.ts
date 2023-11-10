@@ -13,6 +13,7 @@ const controller = new CategoryController(service)
 categoryRouter.use(authMiddleware)
 categoryRouter.post('/', (req:Request,res:Response) => (controller.handleCreateCategory({ req, res })))
 categoryRouter.get('/', (req:Request,res:Response) => (controller.handleGetAllCategories({ req, res })))
+categoryRouter.patch('/:id', (req:Request,res:Response) => (controller.handleUpdateCategory({ req, res })))
 
 
 export default categoryRouter

@@ -31,7 +31,6 @@ export default class UserController {
 
     async handleDeleteUser({ req, res }: HandleRequest) {
         const { id } = req.params
-        
         await this.userService.deleteUser({ user_id: id })
         return new HandleResponse(HttpStatus.NO_CONTENT, `Usuário deletado`).execute(res)
     }
@@ -40,7 +39,6 @@ export default class UserController {
         const { id } = req.params
         const { is_balance_recurrent, name, password } = req.body
         if (!is_balance_recurrent && !name && !password) throw new InvalidBodyError();
-
         const userRes = await this.userService.updateUser({ user_id: id, is_balance_recurrent, name, password })
         const { password: _, ...user } = userRes
         return new HandleResponse(HttpStatus.CREATED, undefined, user).execute(res)
@@ -49,9 +47,7 @@ export default class UserController {
     async handleAuth({ req, res }: HandleRequest) {
         const { email, password }: AuthDto = req.body
         if (!email || !password) throw new InvalidBodyError();
-
         const auth = await this.userService.auth({ email, password })
-
         return res.status(HttpStatus.CREATED).json(auth)
     }
 }

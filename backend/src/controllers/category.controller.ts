@@ -20,4 +20,12 @@ export default class CategoryController {
         const categories = await this.categoryService.getAllCategories()
         return new HandleResponse(HttpStatus.OK,undefined,categories).execute(res)
     }
+
+    async handleUpdateCategory({req,res}:HandleRequest){
+        const { id }  = req.params
+        const { name } = req.body
+        if (!name) throw new InvalidBodyError();
+        const categoryEdit = await this.categoryService.updateCategory({category_id:parseInt(id),name})
+        return new HandleResponse(HttpStatus.CREATED,undefined,categoryEdit).execute(res)
+    }
 }
