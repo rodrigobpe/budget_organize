@@ -13,9 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(morgan('dev'))
 
-//middleware de errors
-app.use(handleErrorMiddleware)
-
 //rotas
 app.use(router)
 
+app.use(handleErrorMiddleware)
