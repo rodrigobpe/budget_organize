@@ -19,6 +19,6 @@ export default class CategoryService{
     async updateCategory({category_id,name}:Category){
         const category = await this.prismaCategoryRepo.getById({category_id})
         if(!category)throw new NotFoundError('Categoria não encontrada')
-        return category
+        return await this.prismaCategoryRepo.update({name,category_id})
     }
 }
