@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import UnauthorizedError from "../errors/unauthorized.error";
-import jwt, { JwtPayload } from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import prisma from "@database/index";
 import HttpStatus from "@utils/http-status";
 
@@ -9,6 +9,7 @@ type JWToken = {
 }
 const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const { authorization } = req.headers
+    const treeHoursToMilliseconds = 10800000
     if (!authorization) throw new UnauthorizedError("Não autorizado, está faltando o JWT")
 
     const token = authorization.split(" ")[1];
@@ -17,8 +18,8 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
         if (error) {
             return res.status(HttpStatus.UNAUTHORIZED).json({
                 statusCode: HttpStatus.UNAUTHORIZED,
-                error: error.name,
-                message: error.message
+                message: error.message,
+                timeStamp: new Date(Date.now() - treeHoursToMilliseconds).toISOString()
             })
         }
         const { id } = result as JWToken
