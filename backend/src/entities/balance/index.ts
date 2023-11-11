@@ -1,14 +1,8 @@
 export default class Balance{
-    balance_id:number;
+    balance_id:bigint;
     amount:number;
-    strategy:Strategy;
+    strategy:string;
     created_at:Date;
-    user_id:string
+    user_id:string;
 }
 
-enum Strategy{
-    Daily,
-    Weekly,
-    Biweekly,
-    Annual
-}

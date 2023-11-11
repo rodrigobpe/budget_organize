@@ -8,20 +8,20 @@ export default class PrismaUserRepo implements UserRepo {
     async getAll(): Promise<Partial<User>[]> {
         return await prisma.user.findMany({
             select: {
+                user_id: true,
                 email: true,
                 is_balance_recurrent: true,
                 name: true,
-                user_id: true,
-                balance: true,
-                bill:true,
-                credit_card:true,
+                balance: { select: { balance_id: true, amount: true, created_at: true, strategy: true } },
+                bill: true,
+                credit_card: {select: {credit_card_id:true,name:true,icon:true,invoice_due_date:true}},
             }
         })
     }
-    async create({ email, name, password,is_balance_recurrent }: CreateUserDto): Promise<User> {
+    async create({ email, name, password, is_balance_recurrent }: CreateUserDto): Promise<User> {
         return await prisma.user.create({
             data: {
-                email, name, password,is_balance_recurrent
+                email, name, password, is_balance_recurrent
             }
         })
     }
@@ -35,10 +35,10 @@ export default class PrismaUserRepo implements UserRepo {
     async getById({ user_id }: { user_id: string; }): Promise<User> {
         return await prisma.user.findFirst({
             where: { user_id },
-            include:{
-                balance:true,
-                bill:true,
-                credit_card:true,
+            include: {
+                balance: true,
+                bill: true,
+                credit_card: true,
             }
         })
     }
@@ -48,15 +48,15 @@ export default class PrismaUserRepo implements UserRepo {
             where: { user_id }
         })
     }
-    
+
     async update({ user_id, is_balance_recurrent, name, password }: UpdateUserDTO): Promise<User> {
         return await prisma.user.update({
-            data:{
+            data: {
                 name,
                 is_balance_recurrent,
                 password
             },
-            where:{
+            where: {
                 user_id
             }
         })
