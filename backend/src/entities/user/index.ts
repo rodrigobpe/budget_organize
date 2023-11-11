@@ -3,5 +3,5 @@ export default class User{
     name:string;
     email:string;
     password:string;
-    is_balance_recurrent?:boolean
+    is_budget_recurrent?:boolean
 }
