@@ -11,13 +11,13 @@ datasource db {
 }
 
 model User {
-  user_id              String   @id @default(uuid())
-  name                 String
-  email                String   @unique
-  password             String
-  is_balance_recurrent Boolean?
+  user_id             String   @id @default(uuid())
+  name                String
+  email               String   @unique
+  password            String
+  is_budget_recurrent Boolean?
 
-  balance     Balance[]
+  budget      Budget[]
   bill        Bill[]
   tag         Tag[]
   credit_card CreditCard[]
@@ -25,20 +25,20 @@ model User {
   @@map("user")
 }
 
-model Balance {
-  balance_id Int    @id @default(autoincrement())
-  amount     Float   
+model Budget {
+  budget_id  Int      @id @default(autoincrement())
+  amount     Float
   strategy   Strategy
-  created_at DateTime 
+  created_at DateTime
   user_id    String
 
   user User @relation(fields: [user_id], references: [user_id])
 
-  @@map("balance")
+  @@map("budget")
 }
 
 model Bill {
-  bill_id        Int   @id @default(autoincrement())
+  bill_id        Int      @id @default(autoincrement())
   price          Decimal
   title          String
   date           DateTime @default(now())
