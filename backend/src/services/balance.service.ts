@@ -3,6 +3,7 @@ import Balance from "@entities/Balance";
 import PrismaBalanceRepo from "@repositories/balance/prisma-balance.repo";
 import CreateBalanceDto from "@entities/balance/dto/create-balance.dto";
 import PrismaUserRepo from "@repositories/user/prisma-user.repo";
+import DeleteBalanceDto from "@entities/balance/dto/delete-balance.dto";
 
 export default class BalanceService {
     constructor(
@@ -20,6 +21,12 @@ export default class BalanceService {
         const balances = await this.prismaBalanceRepo.getAll()
         if (balances.length === 0) throw new NotFoundError('Nenhum saldo encontrado')
         return balances
+    }
+
+    async deleteBalance({balance_id}:DeleteBalanceDto):Promise<void>{
+        const balance = await this.prismaBalanceRepo.getById({balance_id})        
+        if(!balance)throw new NotFoundError('Saldo não encontrado')
+        return await this.prismaBalanceRepo.delete({balance_id})
     }
 
     // async updateBalance({Balance_id,name}:Balance):Promise<Balance>{

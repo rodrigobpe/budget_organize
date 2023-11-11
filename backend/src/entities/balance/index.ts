@@ -1,5 +1,5 @@
 export default class Balance{
-    balance_id:bigint;
+    balance_id:number;
     amount:number;
     strategy:string;
     created_at:Date;

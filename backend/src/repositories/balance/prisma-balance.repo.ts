@@ -3,8 +3,12 @@ import CreateBalanceDto from "@entities/balance/dto/create-balance.dto";
 import BalanceRepo from "./balance.repo";
 import prisma from "@database/index";
 import utcBrazilMilliseconds from "@utils/utcBrazil";
+import DeleteBalanceDto from "@entities/balance/dto/delete-balance.dto";
 
 export default class PrismaBalanceRepo implements BalanceRepo {
+    async delete({ balance_id }:DeleteBalanceDto): Promise<void> {
+        await prisma.balance.delete({where:{balance_id}})
+    }
     async create({ amount, strategy, user_id }: CreateBalanceDto): Promise<Balance> {
         return await prisma.balance.create({
             data: {

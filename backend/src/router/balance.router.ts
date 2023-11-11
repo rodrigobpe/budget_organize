@@ -15,7 +15,8 @@ const controller = new BalanceController(service)
 
 balanceRouter.use(authMiddleware)
 balanceRouter.post('/users/:id/balances', (req:Request,res:Response) => (controller.handleCreateBalance({ req, res })))
-balanceRouter.get('/users/balances', (req:Request,res:Response) => (controller.handleGetAllBalances({ req, res })))
+balanceRouter.get('/balances', (req:Request,res:Response) => (controller.handleGetAllBalances({ req, res })))
+balanceRouter.delete('/balances/:balance_id', (req:Request,res:Response) => (controller.handleDeleteBalance({ req, res })))
 // balanceRouter.patch('/:id', (req:Request,res:Response) => (controller.handleUpdateCategory({ req, res })))
 
 

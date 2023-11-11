@@ -1,4 +1,5 @@
 import CreateBalanceDto from "@entities/balance/dto/create-balance.dto";
+import DeleteBalanceDto from "@entities/balance/dto/delete-balance.dto";
 import InvalidBodyError from "@errors/invalid-body.error";
 import BalanceService from "@services/balance.service";
 import HandleRequest from "@utils/handle-request";
@@ -14,12 +15,18 @@ export default class BalanceController {
         if (!amount || !strategy) throw new InvalidBodyError();
 
         const category = await this.balanceService.createBalance({ amount, strategy, user_id: id })
-        return new HandleResponse(HttpStatus.CREATED, 'Categoria criada', category).execute(res)
+        return new HandleResponse(HttpStatus.CREATED, 'Saldo criado', category).execute(res)
     }
 
     async handleGetAllBalances({ req, res }: HandleRequest) {
         const categories = await this.balanceService.getAllBalances()
         return new HandleResponse(HttpStatus.OK, undefined, categories).execute(res)
+    }
+
+    async handleDeleteBalance({req,res}:HandleRequest){
+        const {balance_id} = req.params
+        await this.balanceService.deleteBalance({balance_id:parseInt(balance_id)})
+        return new HandleResponse(HttpStatus.NO_CONTENT, 'Saldo deletado').execute(res)
     }
 
 //     async handleUpdateCategory({req,res}:HandleRequest){
