@@ -4,7 +4,7 @@ enum HttpStatus{
     NOT_FOUND = 404,
     UNAUTHORIZED = 401,
     BAD_REQUEST = 400,
-    NO_CONTENT = 203,
+    NO_CONTENT = 204,
     CREATED = 201,
     OK = 200
 }
