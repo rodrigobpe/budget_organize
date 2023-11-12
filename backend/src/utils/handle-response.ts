@@ -2,12 +2,13 @@ import User from "@entities/user";
 import Budget from "@entities/Budget";
 import Category from "@entities/category";
 import { Response } from "express";
+import CreditCard from "@entities/credit-card";
 
 export default class HandleResponse {
     constructor(
         public statusCode: number,
         public message?: string | undefined,
-        public data?: Partial<User> | Partial<User>[] | Category | Category[] | Budget | Budget[]
+        public data?: Partial<User> | Partial<User>[] | Category | Category[] | Budget | Budget[] | CreditCard | CreditCard[] 
     ) { }
 
     execute(res: Response) {
