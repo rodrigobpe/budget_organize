@@ -15,4 +15,10 @@ export default class CreditCardService{
         if(!user) throw new NotFoundError('Usuário não encontrado')
         return await this.prismaCreditCardRepo.create({bank,invoice_due_date,name,user_id})
     }
+
+    async getAllCreditCards():Promise<CreditCard[]>{
+        const creditCards = await this.prismaCreditCardRepo.getAll()
+        if(creditCards.length === 0)throw new NotFoundError("Nenhum cartão de crédito cadastrado")
+        return creditCards
+    }
 }

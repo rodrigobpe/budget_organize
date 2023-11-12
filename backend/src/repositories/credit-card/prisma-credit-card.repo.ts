@@ -9,7 +9,7 @@ export default class PrismaCreditCardRepo implements CreditCardRepo {
             data: { bank, invoice_due_date, name, user_id }
         })
     }
-    async getAll(): Promise<Partial<CreditCard>[]> {
+    async getAll(): Promise<CreditCard[]> {
         return prisma.creditCard.findMany()
     }
     async getById({ credit_card_id }: { credit_card_id: number; }): Promise<CreditCard> {
