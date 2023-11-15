@@ -14,11 +14,11 @@ export default class CreditCardController {
         if (!bank || !invoice_due_date || !name || !limit) throw new InvalidBodyError()
 
         const creditCard = await this.creditCardService.createCreditCard({bank,invoice_due_date,name,user_id,limit})
-        return new HandleResponse(HttpStatus.CREATED,"Cartão de crédito criado",creditCard)
+        return new HandleResponse(HttpStatus.CREATED,"Cartão de crédito criado",creditCard).execute(res)
     }
 
     async handleGetAllCreditCards({req,res}:HandleRequest){
         const creditCards = await this.creditCardService.getAllCreditCards()
-        return new HandleResponse(HttpStatus.OK,undefined,creditCards)
+        return new HandleResponse(HttpStatus.OK,undefined,creditCards).execute(res)
     }
 }

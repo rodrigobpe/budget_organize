@@ -11,10 +11,10 @@ export default class CreditCardService{
         private readonly prismaCreditCardRepo:PrismaCreditCardRepo,      
     ){}
 
-    async createCreditCard({bank,invoice_due_date,name,user_id}:CreateCreditCardDto):Promise<CreditCard>{
+    async createCreditCard({bank,invoice_due_date,name,user_id,limit}:CreateCreditCardDto):Promise<CreditCard>{
         const userExist = await this.prismaUserRepo.getById({user_id});
         if(!userExist) throw new NotFoundError('Usuário não encontrado')
-        return await this.prismaCreditCardRepo.create({bank,invoice_due_date,name,user_id})
+        return await this.prismaCreditCardRepo.create({bank,invoice_due_date,name,user_id,limit})
     }
 
     async getAllCreditCards():Promise<CreditCard[]>{
