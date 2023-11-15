@@ -13,12 +13,19 @@ export default class CreditCardController {
         const { user_id } = req.params
         if (!bank || !invoice_due_date || !name || !limit) throw new InvalidBodyError()
 
-        const creditCard = await this.creditCardService.createCreditCard({bank,invoice_due_date,name,user_id,limit})
-        return new HandleResponse(HttpStatus.CREATED,"Cartão de crédito criado",creditCard).execute(res)
+        const creditCard = await this.creditCardService.createCreditCard({ bank, invoice_due_date, name, user_id, limit })
+        return new HandleResponse(HttpStatus.CREATED, "Cartão de crédito criado", creditCard).execute(res)
     }
 
-    async handleGetAllCreditCards({req,res}:HandleRequest){
+    async handleGetAllCreditCards({ req, res }: HandleRequest) {
         const creditCards = await this.creditCardService.getAllCreditCards()
-        return new HandleResponse(HttpStatus.OK,undefined,creditCards).execute(res)
+        return new HandleResponse(HttpStatus.OK, undefined, creditCards).execute(res)
     }
+
+    async handleDeleteCreditCard({ req, res }: HandleRequest) {
+        const { id } = req.params
+        const creditCard = await this.creditCardService.deleteCreditCard({credit_card_id:parseInt(id)})
+        return new HandleResponse(HttpStatus.NO_CONTENT,"Cartão de crédito deletado").execute(res)
+    }
+
 }
