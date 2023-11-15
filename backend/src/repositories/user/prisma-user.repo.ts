@@ -14,7 +14,7 @@ export default class PrismaUserRepo implements UserRepo {
                 name: true,
                 budget: { select: { budget_id: true, amount: true, created_at: true, strategy: true } },
                 bill: true,
-                credit_card: {select: {credit_card_id:true,name:true,icon:true,invoice_due_date:true}},
+                credit_card: { select: { credit_card_id: true, name: true, limit: true, invoice_due_date: true } },
             }
         })
     }

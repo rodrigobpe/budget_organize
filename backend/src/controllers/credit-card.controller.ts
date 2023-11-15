@@ -24,8 +24,8 @@ export default class CreditCardController {
 
     async handleDeleteCreditCard({ req, res }: HandleRequest) {
         const { id } = req.params
-        const creditCard = await this.creditCardService.deleteCreditCard({credit_card_id:parseInt(id)})
-        return new HandleResponse(HttpStatus.NO_CONTENT,"Cartão de crédito deletado").execute(res)
+        await this.creditCardService.deleteCreditCard({credit_card_id:parseInt(id)})
+        return new HandleResponse(HttpStatus.CREATED,"Cartão de crédito deletado").execute(res)
     }
 
 }
