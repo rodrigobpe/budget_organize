@@ -8,6 +8,4 @@ export default abstract class CreditCardRepo {
     abstract getAll(): Promise<CreditCard[] | null>;
     abstract getById({ credit_card_id }: {credit_card_id:number}): Promise<CreditCard | null>;
     abstract delete({ credit_card_id }: DeleteCreditCardDto): Promise<void>;
-
-
 }

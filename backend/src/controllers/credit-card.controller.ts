@@ -16,4 +16,9 @@ export default class CreditCardController {
         const creditCard = await this.creditCardService.createCreditCard({bank,invoice_due_date,name,user_id})
         return new HandleResponse(HttpStatus.CREATED,"Cartão de crédito criado",creditCard)
     }
+
+    async handleGetAllCreditCards({req,res}:HandleRequest){
+        const creditCards = await this.creditCardService.getAllCreditCards()
+        return new HandleResponse(HttpStatus.OK,undefined,creditCards)
+    }
 }

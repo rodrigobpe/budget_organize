@@ -1,6 +1,6 @@
 import CreditCard from "@entities/credit-card";
 import CreateCreditCardDto from "@entities/credit-card/dto/create-credit-card.dto";
-import CreditCardRepo from "./CreditCardRepo";
+import CreditCardRepo from "./credit-card.repo";
 import prisma from "@database/index";
 import DeleteCreditCardDto from "@entities/credit-card/dto/delete-credit-card.dto";
 
@@ -13,7 +13,7 @@ export default class PrismaCreditCardRepo implements CreditCardRepo {
     async getAll(): Promise<CreditCard[]> {
         return prisma.creditCard.findMany()
     }
-    async getById({ credit_card_id }: {credit_card_id:number}): Promise<CreditCard> {
+    async getById({ credit_card_id }: { credit_card_id: number }): Promise<CreditCard> {
         return prisma.creditCard.findFirst({ where: { credit_card_id } })
     }
 

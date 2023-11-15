@@ -37,9 +37,9 @@ export default class UserController {
 
     async handleUpdateUser({ req, res }: HandleRequest) {
         const { id } = req.params
-        const { is_balance_recurrent, name, password } = req.body
-        if (!is_balance_recurrent && !name && !password) throw new InvalidBodyError();
-        const userRes = await this.userService.updateUser({ user_id: id, is_balance_recurrent, name, password })
+        const { is_budget_recurrent, name, password } = req.body
+        if (!is_budget_recurrent && !name && !password) throw new InvalidBodyError();
+        const userRes = await this.userService.updateUser({ user_id: id, is_budget_recurrent, name, password })
         const { password: _, ...user } = userRes
         return new HandleResponse(HttpStatus.CREATED, undefined, user).execute(res)
     }
