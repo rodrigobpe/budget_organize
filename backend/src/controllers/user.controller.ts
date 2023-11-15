@@ -32,7 +32,7 @@ export default class UserController {
     async handleDeleteUser({ req, res }: HandleRequest) {
         const { id } = req.params
         await this.userService.deleteUser({ user_id: id })
-        return new HandleResponse(HttpStatus.CREATED, `Usuário deletado`).execute(res)
+        return new HandleResponse(HttpStatus.OK, `Usuário deletado`).execute(res)
     }
 
     async handleUpdateUser({ req, res }: HandleRequest) {

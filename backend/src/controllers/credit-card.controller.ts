@@ -1,4 +1,5 @@
 import CreateCreditCardDto from "@entities/credit-card/dto/create-credit-card.dto";
+import UpdateCreditCardDto from "@entities/credit-card/dto/update-credit-card.dto";
 import InvalidBodyError from "@errors/invalid-body.error";
 import CreditCardService from "@services/credit-card.service";
 import HandleRequest from "@utils/handle-request";
@@ -24,8 +25,17 @@ export default class CreditCardController {
 
     async handleDeleteCreditCard({ req, res }: HandleRequest) {
         const { id } = req.params
-        await this.creditCardService.deleteCreditCard({credit_card_id:parseInt(id)})
-        return new HandleResponse(HttpStatus.CREATED,"Cartão de crédito deletado").execute(res)
+        await this.creditCardService.deleteCreditCard({ credit_card_id: parseInt(id) })
+        return new HandleResponse(HttpStatus.OK, "Cartão de crédito deletado").execute(res)
+    }
+
+    async handleUpdateCreditCard({ req, res }: HandleRequest) {
+        const { id } = req.params
+        const { bank, invoice_due_date, limit, name }: UpdateCreditCardDto = req.body
+        if (!bank && !invoice_due_date && !limit && !name) throw new InvalidBodyError()
+
+        const updateCreditCard = await this.creditCardService.updateCreditCard({ credit_card_id: parseInt(id), bank, invoice_due_date, limit, name })
+        return new HandleResponse(HttpStatus.CREATED, "Cartão de crédito atualizado",updateCreditCard).execute(res)
     }
 
 }

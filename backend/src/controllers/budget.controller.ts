@@ -25,7 +25,7 @@ export default class BudgetController {
     async handleDeleteBudget({req,res}:HandleRequest){
         const {budget_id} = req.params
         await this.BudgetService.deleteBudget({budget_id:parseInt(budget_id)})
-        return new HandleResponse(HttpStatus.CREATED, 'Saldo deletado').execute(res)
+        return new HandleResponse(HttpStatus.OK, 'Saldo deletado').execute(res)
     }
 
 //     async handleUpdateCategory({req,res}:HandleRequest){

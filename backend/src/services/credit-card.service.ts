@@ -1,6 +1,7 @@
 import CreditCard from "@entities/credit-card";
 import CreateCreditCardDto from "@entities/credit-card/dto/create-credit-card.dto";
 import DeleteCreditCardDto from "@entities/credit-card/dto/delete-credit-card.dto";
+import UpdateCreditCardDto from "@entities/credit-card/dto/update-credit-card.dto";
 import NotFoundError from "@errors/not-found.error";
 import PrismaCreditCardRepo from "@repositories/credit-card/prisma-credit-card.repo";
 import PrismaUserRepo from "@repositories/user/prisma-user.repo";
@@ -27,5 +28,11 @@ export default class CreditCardService{
         const creditCardExist = await this.prismaCreditCardRepo.getById({credit_card_id})
         if(!creditCardExist)throw new NotFoundError("Cartão de crédito não encontrado")
         await this.prismaCreditCardRepo.delete({credit_card_id})
+    }
+
+    async updateCreditCard({credit_card_id,bank,invoice_due_date,limit,name}:UpdateCreditCardDto):Promise<CreditCard>{
+        const creditCardExist = await this.prismaCreditCardRepo.getById({credit_card_id})
+        if(!creditCardExist)throw new NotFoundError("Cartão de crédito não encontrado")
+        return await this.prismaCreditCardRepo.update({credit_card_id,bank,invoice_due_date,limit,name})
     }
 }
