@@ -4,7 +4,7 @@ import DeleteCreditCardDto from "@entities/credit-card/dto/delete-credit-card.dt
 
 
 export default abstract class CreditCardRepo {
-    abstract create({ bank, invoice_due_date, name, user_id }: CreateCreditCardDto): Promise<CreditCard>;
+    abstract create({ bank, invoice_due_date, name,limit, user_id }: CreateCreditCardDto): Promise<CreditCard>;
     abstract getAll(): Promise<CreditCard[] | null>;
     abstract getById({ credit_card_id }: {credit_card_id:number}): Promise<CreditCard | null>;
     abstract delete({ credit_card_id }: DeleteCreditCardDto): Promise<void>;

@@ -79,6 +79,7 @@ model CreditCard {
   name             String
   bank             String   @db.VarChar(60)
   invoice_due_date DateTime @db.Timestamp()
+  limit            Float
   user_id          String
 
   Bill Bill[]

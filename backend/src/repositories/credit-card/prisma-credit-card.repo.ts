@@ -5,9 +5,9 @@ import prisma from "@database/index";
 import DeleteCreditCardDto from "@entities/credit-card/dto/delete-credit-card.dto";
 
 export default class PrismaCreditCardRepo implements CreditCardRepo {
-    async create({ bank, invoice_due_date, name, user_id }: CreateCreditCardDto): Promise<CreditCard> {
+    async create({ bank, invoice_due_date, name, limit, user_id }: CreateCreditCardDto): Promise<CreditCard> {
         return prisma.creditCard.create({
-            data: { bank, invoice_due_date, name, user_id }
+            data: { bank, invoice_due_date, name, limit, user_id }
         })
     }
     async getAll(): Promise<CreditCard[]> {

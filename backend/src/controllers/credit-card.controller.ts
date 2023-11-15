@@ -9,11 +9,11 @@ export default class CreditCardController {
     constructor(private readonly creditCardService: CreditCardService) { }
 
     async handleCreateCreditCard({ req, res }: HandleRequest) {
-        const { bank, invoice_due_date, name }: CreateCreditCardDto = req.body
+        const { bank, invoice_due_date, name, limit }: CreateCreditCardDto = req.body
         const { user_id } = req.params
-        if (!bank || !invoice_due_date || !name) throw new InvalidBodyError()
+        if (!bank || !invoice_due_date || !name || !limit) throw new InvalidBodyError()
 
-        const creditCard = await this.creditCardService.createCreditCard({bank,invoice_due_date,name,user_id})
+        const creditCard = await this.creditCardService.createCreditCard({bank,invoice_due_date,name,user_id,limit})
         return new HandleResponse(HttpStatus.CREATED,"Cartão de crédito criado",creditCard)
     }
 
