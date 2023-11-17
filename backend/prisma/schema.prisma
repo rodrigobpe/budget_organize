@@ -39,7 +39,7 @@ model Budget {
 
 model Bill {
   bill_id        Int      @id @default(autoincrement())
-  price          Decimal
+  price          Float
   title          String
   date           DateTime @default(now())
   user_id        String
@@ -78,7 +78,7 @@ model CreditCard {
   credit_card_id   Int      @id @default(autoincrement())
   name             String
   bank             String   @db.VarChar(60)
-  invoice_due_date DateTime @db.Timestamp()
+  invoice_due_date DateTime @db.Timestamp(3)
   limit            Float
   user_id          String
 
