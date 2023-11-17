@@ -13,7 +13,7 @@ const service = new CreditCardService(userRepo, creditCardRepo)
 const controller = new CreditCardController(service)
 
 creditCardRouter.use(authMiddleware)
-creditCardRouter.post('/users/:user_id/credit-cards', (req: Request, res: Response) => controller.handleCreateCreditCard({ req, res }))
+creditCardRouter.post('/user/:user_id/credit-cards', (req: Request, res: Response) => controller.handleCreateCreditCard({ req, res }))
 creditCardRouter.get('/credit-cards', (req: Request, res: Response) => controller.handleGetAllCreditCards({ req, res }))
 creditCardRouter.delete('/credit-cards/:id', (req: Request, res: Response) => controller.handleDeleteCreditCard({ req, res }))
 creditCardRouter.patch('/credit-cards/:id', (req: Request, res: Response) => controller.handleUpdateCreditCard({ req, res }))

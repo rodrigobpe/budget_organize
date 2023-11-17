@@ -14,7 +14,7 @@ const service = new BudgetService(budgetRepo,userRepo)
 const controller = new BudgetController(service)
 
 budgetRouter.use(authMiddleware)
-budgetRouter.post('/users/:id/budgets', (req:Request,res:Response) => (controller.handleCreateBudget({ req, res })))
+budgetRouter.post('/user/:id/budgets', (req:Request,res:Response) => (controller.handleCreateBudget({ req, res })))
 budgetRouter.get('/budgets', (req:Request,res:Response) => (controller.handleGetAllBudgets({ req, res })))
 budgetRouter.delete('/budgets/:budget_id', (req:Request,res:Response) => (controller.handleDeleteBudget({ req, res })))
 // budgetRouter.patch('/:id', (req:Request,res:Response) => (controller.handleUpdateCategory({ req, res })))
