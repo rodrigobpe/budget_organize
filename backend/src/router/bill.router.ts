@@ -17,6 +17,6 @@ const controller = new BillController(service)
 
 billRouter.use(authMiddleware)
 billRouter.post('/user/:user_id/bills', (req:Request,res:Response) => (controller.handleCreateBill({req,res})))
-billRouter.post('/bills/:id', (req:Request,res:Response) => (controller.handleGetBillById({req,res})))
+billRouter.get('/bills/:id', (req:Request,res:Response) => (controller.handleGetBillById({req,res})))
 
 export default billRouter
