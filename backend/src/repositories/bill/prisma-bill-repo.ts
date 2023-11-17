@@ -14,7 +14,7 @@ export default class PrismaBillRepo implements BillRepo{
         throw new Error("Method not implemented.");
     }
     async getById({ bill_id }: { bill_id: number; }): Promise<Bill> {
-        throw new Error("Method not implemented.");
+        return await prisma.bill.findFirst({where:{bill_id}})
     }
 
 }
