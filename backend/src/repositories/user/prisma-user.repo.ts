@@ -10,11 +10,11 @@ export default class PrismaUserRepo implements UserRepo {
             select: {
                 user_id: true,
                 email: true,
+                password: true,
                 is_budget_recurrent: true,
                 name: true,
-                budget: { select: { budget_id: true, amount: true, created_at: true, strategy: true } },
-                bill: true,
-                credit_card: { select: { credit_card_id: true, name: true, limit: true, invoice_due_date: true } },
+                budget: { select: { budget_id: true, amount: true, created_at: true, strategy: true, user_id: false } },
+                credit_card: { select: { credit_card_id: true, name: true, limit: true, invoice_due_date: true, user_id: false, Bill: { select: { bill_id: true, price: true, title: true, date: true, category: { select: { name: true, category_id: true } }, tag: { select: { name: true, tag_id: true } } } } } },
             }
         })
     }
@@ -35,10 +35,14 @@ export default class PrismaUserRepo implements UserRepo {
     async getById({ user_id }: { user_id: string; }): Promise<User> {
         return await prisma.user.findFirst({
             where: { user_id },
-            include: {
-                budget: true,
-                bill: true,
-                credit_card: true,
+            select: {
+                user_id: true,
+                email: true,
+                password: true,
+                is_budget_recurrent: true,
+                name: true,
+                budget: { select: { budget_id: true, amount: true, created_at: true, strategy: true, user_id: false } },
+                credit_card: { select: { credit_card_id: true, name: true, limit: true, invoice_due_date: true, user_id: false, Bill: { select: { bill_id: true, price: true, title: true, date: true, category: { select: { name: true, category_id: true } }, tag: { select: { name: true, tag_id: true } } } } } },
             }
         })
     }
