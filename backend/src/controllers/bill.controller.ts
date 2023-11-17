@@ -15,4 +15,10 @@ export class BillController {
         const bill = await this.billService.createBill({category_id,credit_card_id,price,title,user_id})
         return new HandleResponse(HttpStatus.CREATED,"Despesa criada",bill).execute(res)
     }
+
+    async handleGetBillById({req,res}:HandleRequest){
+        const {id} = req.params
+        const bill = await this.billService.getBillById({bill_id:parseInt(id)})
+        return new HandleResponse(HttpStatus.OK,undefined,bill).execute(res)
+    }
 }
