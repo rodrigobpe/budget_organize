@@ -15,7 +15,7 @@ export default class UserService{
     async createUser({email,name,password}:CreateUserDto){
         const userExists = await this.prismaUserRepo.getByEmail({email})
         if(userExists) throw new UnprocessableEntityError('Usuário já está cadastrado')
-        return this.prismaUserRepo.create({email,name,password:hashPassword(password,10),is_balance_recurrent:false})
+        return this.prismaUserRepo.create({email,name,password:hashPassword(password,10),is_budget_recurrent:false})
     }
 
     async getUserById({user_id}:{user_id:string}){
@@ -36,10 +36,10 @@ export default class UserService{
         return await this.prismaUserRepo.delete({user_id})
     }
 
-    async updateUser({user_id,is_balance_recurrent,name,password}:UpdateUserDTO){
+    async updateUser({user_id,is_budget_recurrent,name,password}:UpdateUserDTO){
         const userExists = await this.prismaUserRepo.getById({user_id})
         if(!userExists) throw new NotFoundError('Usuário não encontrado')
-        return this.prismaUserRepo.update({user_id,name,password:hashPassword(password,10),is_balance_recurrent})
+        return this.prismaUserRepo.update({user_id,name,password:hashPassword(password,10),is_budget_recurrent})
     }
 
     async auth({ email, password }: AuthDto) {
