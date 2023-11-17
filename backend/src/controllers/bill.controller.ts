@@ -21,4 +21,10 @@ export class BillController {
         const bill = await this.billService.getBillById({bill_id:parseInt(id)})
         return new HandleResponse(HttpStatus.OK,undefined,bill).execute(res)
     }
+    
+    async handleGetAllBillsByUser({req,res}:HandleRequest){
+        const {user_id} = req
+        const bills = await this.billService.getAllBillsByUser({user_id})
+        return new HandleResponse(HttpStatus.OK,undefined,bills).execute(res)
+    }
 }
