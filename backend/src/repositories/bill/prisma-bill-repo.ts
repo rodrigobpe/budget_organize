@@ -18,5 +18,10 @@ export default class PrismaBillRepo implements BillRepo {
     async getById({ bill_id }: { bill_id: number; }): Promise<Bill> {
         return await prisma.bill.findFirst({ where: { bill_id } })
     }
-
+    
+    async delete({ bill_id }: { bill_id: number; }): Promise<void> {
+        await prisma.bill.delete({
+            where:{bill_id}
+        })
+    }
 }

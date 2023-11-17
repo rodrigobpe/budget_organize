@@ -27,4 +27,10 @@ export class BillController {
         const bills = await this.billService.getAllBillsByUser({user_id})
         return new HandleResponse(HttpStatus.OK,undefined,bills).execute(res)
     }
+
+    async handleDeleteBill({req,res}:HandleRequest){
+        const {id} = req.params
+        await this.billService.deleteBill({bill_id:parseInt(id)})
+        return new HandleResponse(HttpStatus.OK,'Despesa deletada').execute(res)
+    }
 }

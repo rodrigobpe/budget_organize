@@ -5,4 +5,6 @@ export default abstract class BillRepo {
     abstract create({ category_id, credit_card_id, price, title, user_id }: CreateBillDto): Promise<Bill>;
     abstract getAllByUser({ user_id }: { user_id: string }): Promise<Bill[] | null>;
     abstract getById({ bill_id }: { bill_id: number }): Promise<Bill | null>;
+    abstract delete({ bill_id }: { bill_id: number }): Promise<void>;
+
 }

@@ -36,4 +36,10 @@ export default class BillService {
         if(!userExist)throw new NotFoundError("Usuário não encontrado")
         return await this.prismaBillRepo.getAllByUser({user_id})
     }
+
+    async deleteBill({bill_id}:{bill_id:number}):Promise<void>{
+        const billExist = await this.prismaBillRepo.getById({bill_id})
+        if(!billExist) throw new NotFoundError("Despesa não encontrada")
+        await this.prismaBillRepo.delete({bill_id})
+    }
 }
