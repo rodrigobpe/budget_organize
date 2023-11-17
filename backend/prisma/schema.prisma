@@ -49,7 +49,7 @@ model Bill {
   user        User       @relation(fields: [user_id], references: [user_id])
   category    Category   @relation(fields: [category_id], references: [category_id])
   credit_card CreditCard @relation(fields: [credit_card_id], references: [credit_card_id])
-  Tag         Tag[]
+  tag         Tag[]
 
   @@map("bill")
 }
