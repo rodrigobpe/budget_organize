@@ -24,4 +24,10 @@ export default class BillService {
 
         return await this.prismaBillRepo.create({category_id,credit_card_id,price,title,user_id})
     }
+
+    async getBillById({bill_id}:{bill_id:number}):Promise<Bill>{
+        const bill = await this.prismaBillRepo.getById({bill_id})
+        if(!bill)throw new NotFoundError("Despesa não encontrada")
+        return bill
+    }
 }
